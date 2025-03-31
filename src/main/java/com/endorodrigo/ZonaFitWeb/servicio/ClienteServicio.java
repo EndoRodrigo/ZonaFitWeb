@@ -1,7 +1,7 @@
 package com.endorodrigo.ZonaFitWeb.servicio;
 
-import com.endorodrigo.Sistema.Zona.Fit.modelo.Cliente;
-import com.endorodrigo.Sistema.Zona.Fit.repositorio.ClienteRepositorio;
+import com.endorodrigo.ZonaFitWeb.modelo.Cliente;
+import com.endorodrigo.ZonaFitWeb.repositorio.ClienteRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;

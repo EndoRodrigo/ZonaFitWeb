@@ -1,7 +1,6 @@
 package com.endorodrigo.ZonaFitWeb.servicio;
 
-
-import com.endorodrigo.Sistema.Zona.Fit.modelo.Cliente;
+import com.endorodrigo.ZonaFitWeb.modelo.Cliente;
 
 import java.util.List;
 
