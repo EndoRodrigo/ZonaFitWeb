@@ -42,15 +42,20 @@ public class IndexController {
         this.clienteSeleccionado = new Cliente();
     }
 
-    public void guardarCliente() {
+    public void guardarCliente(){
         logger.info("cliente a guardar: " + this.clienteSeleccionado);
-        // Agregar
+        // Agregar (insert)
         if(this.clienteSeleccionado.getId() == null){
             this.clienteServicio.guardarCliente(this.clienteSeleccionado);
             this.clientes.add(this.clienteSeleccionado);
-            logger.info("Ya se creo el Cliente");
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage("Cliente Agregado"));
+        }
+        // Modificar (update)
+        else{
+            this.clienteServicio.guardarCliente(this.clienteSeleccionado);
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage("Cliente Actualizado"));
         }
         // Ocultar la ventana modal
         PrimeFaces.current().executeScript("PF('ventanaModalCliente').hide()");
@@ -60,4 +65,18 @@ public class IndexController {
         // Reset del objeto cliente seleccionado
         this.clienteSeleccionado = null;
     }
+
+    public void eliminarCliente(){
+        logger.info("Cliente a eliminar: " + this.clienteSeleccionado);
+        this.clienteServicio.eliminarCliente(this.clienteSeleccionado);
+        // Eliminar el registro de la lista de clientes
+        this.clientes.remove(this.clienteSeleccionado);
+        // Reset del objeto de cliente seleccionado
+        this.clienteSeleccionado = null;
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage("Cliente Eliminado"));
+        PrimeFaces.current().ajax().update("forma-clientes:mensajes",
+                "forma-clientes:clientes-tabla");
+    }
+
 }
