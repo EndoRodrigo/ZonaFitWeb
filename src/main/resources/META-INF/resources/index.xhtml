@@ -17,6 +17,10 @@
                         <p:menuitem value="Inicio" icon="pi pi-fw pi-user"
                                     update=":forma-clientes:clientes-tabla"
                                     actionListener="#{indexController.cargarDatos()}"/>
+                        <p:menuitem value="Nuevo Cliente" icon="pi pi-fw pi-plus"
+                                    actionListener="#{indexController.agregarCliente()}"
+                                    update=":forma-modal:cliente-ventana"
+                                    oncomplete="PF('ventanaModalCliente').show()"/>
                     </p:menubar>
                 </div>
                 <!-- DataTable   -->
@@ -53,6 +57,33 @@
 
                     </p:dataTable>
                 </div>
+            </h:form>
+            <h:form id="forma-modal">
+                <p:dialog header="Detalles Cliente" showEffect="fade"
+                          modal="true" widgetVar="ventanaModalCliente"
+                          responsive="true">
+                    <p:outputPanel id="cliente-ventana" class="ui-fluid">
+                        <div class="field">
+                            <p:outputLabel for="nombre">Nombre</p:outputLabel>
+                            <p:inputText id="nombre" value="#{indexController.clienteSeleccionado.nombre}" required="true"/>
+                        </div>
+                        <div class="field">
+
+                            <p:outputLabel for="apellidos">Nombre</p:outputLabel>
+                            <p:inputText id="apellidos" value="#{indexController.clienteSeleccionado.apellido}" required="true"/>
+                        </div>
+                        <div class="field">
+                            <p:outputLabel for="menbresia">Nombre</p:outputLabel>
+                            <p:inputText id="menbresia" value="#{indexController.clienteSeleccionado.membresia}" required="true"/>
+                        </div>
+                    </p:outputPanel>
+                    <f:facet name="footer">
+                        <p:commandButton value="Guardar" icon="pi pi-ckeck" process="cliente-ventana @this"
+                                            actionListener="#{indexController.guardarCliente()}"/>
+                        <p:commandButton value="Cancelar" icon="pi pitimes" onclick="PF('ventanaModalCliente').hide()"
+                                            class="ui-button-secondary"/>
+                    </f:facet>
+                </p:dialog>
             </h:form>
         </div>
     </h:body>
